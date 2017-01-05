@@ -2,21 +2,21 @@
 
 Copyright (c) 2002 Marcin 'Shard' Konicki
 
-Permission is hereby granted, free of charge, to any person obtaining a copy 
-of this software and associated documentation files (the "Software"), to deal 
-in the Software without restriction, including without limitation the rights 
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
-copies of the Software, and to permit persons to whom the Software is 
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-The above copyright notice and this permission notice shall be included in all 
+The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE
 
 */
@@ -112,7 +112,7 @@ AView::Draw( BRect updateRect)
 	// left margin background
 	SetHighColor( tint_color( ViewColor(), B_HIGHLIGHT_BACKGROUND_TINT));
 	FillRect( BRect( 0, 0, B_LARGE_ICON, bounds.bottom));
-	
+
 	// aIcon if any
 	if( aIcon != NULL)
 	{
@@ -191,25 +191,25 @@ ACompressView::ACompressView( BMessage *refs, BMessage *settings)
 		aLeftMargin += B_LARGE_ICON / 2;
 		aHeight += B_LARGE_ICON;
 	}
-	
+
 	// title
 	font.SetSize( fontsize + 2);
 	font.SetFace( B_BOLD_FACE);
 	font.GetHeight( &fontheight);
 	lineheight = ceil( fontheight.ascent + fontheight.descent + fontheight.leading);
-	
+
 	aTitle = new BStringView( BRect( aLeftMargin, aTopMargin, aLeftMargin, aTopMargin), "", "Compressing files");
 	aTitle->SetFont( &font, B_FONT_ALL);
 	aTitle->ResizeToPreferred();
 	rect = aTitle->Frame();
-	
+
 	if( aWidth < rect.right) aWidth = (int32)ceil( rect.right);
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
-	
+
 	// text
 	char *text = new char[B_FILE_NAME_LENGTH+strlen( "Creating archive: ")];
-	sprintf( text, "Creating archive: %s", aPath.Leaf());	
-	
+	sprintf( text, "Creating archive: %s", aPath.Leaf());
+
 	aText = new BStringView( BRect( aLeftMargin, aTopMargin + lineheight + fontheight.leading, aLeftMargin, aTopMargin), "", text);
 	delete text;
 
@@ -220,7 +220,7 @@ ACompressView::ACompressView( BMessage *refs, BMessage *settings)
 	aText->SetFont( &font, B_FONT_ALL);
 	aText->ResizeToPreferred();
 	rect = aText->Frame();
-	
+
 	if( aWidth < rect.right) aWidth = (int32)ceil( rect.right);
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
 
@@ -232,7 +232,7 @@ ACompressView::ACompressView( BMessage *refs, BMessage *settings)
 
 	if( aWidth < rect.right) aWidth = (int32)ceil( rect.right);
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
-	
+
 	ResizeTo( aWidth+=2, aHeight+=2);
 
 	AddChild( aTitle);
@@ -395,7 +395,7 @@ ACompressView::GetCompressThread()
 		// aCompressThread is still running - return it's id
 		return aCompressThread;
 	}
-	
+
 	// there was no aCompressThread running
 	return 0;
 }
@@ -427,7 +427,7 @@ ACompressView::Stop()
 			BEntry entry( aPath.Path());
 			if( entry.Exists())
 				entry.Remove();
-			
+
 			return true;
 		}
 		else
@@ -468,18 +468,18 @@ ASettingsView::ASettingsView( BMessage *settings)
 	// set basic width and height
 	aWidth		= (aLeftMargin += B_LARGE_ICON / 2);
 	aHeight		= aTopMargin;
-	
+
 	// title
 	font.SetSize( fontsize + 5);
 	font.SetFace( B_BOLD_FACE);
 	font.GetHeight( &fontheight);
 	lineheight = ceil( fontheight.ascent + fontheight.descent + fontheight.leading);
-	
+
 	aTitle = new BStringView( BRect( aLeftMargin, aTopMargin, aLeftMargin, aTopMargin), "", "Archiver Settings");
 	aTitle->SetFont( &font, B_FONT_ALL);
 	aTitle->ResizeToPreferred();
 	rect = aTitle->Frame();
-	
+
 	if( aWidth < rect.right) aWidth = (int32)ceil( rect.right);
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
 
@@ -488,7 +488,7 @@ ASettingsView::ASettingsView( BMessage *settings)
 	font.SetFace( B_BOLD_FACE);
 	font.GetHeight( &fontheight);
 	lineheight = ceil( fontheight.ascent + fontheight.descent + fontheight.leading);
-	
+
 	aHeight += 5; // some space between main title and aRulesBox title
 
 	aRulesBox = new BBox( BRect( aLeftMargin, aHeight, aLeftMargin, aHeight));
@@ -515,12 +515,12 @@ ASettingsView::ASettingsView( BMessage *settings)
 		float iwidth, iheight;			// item width and height
 		float bwidth = 0;				// aRulesBox width
 		float bheight = lineheight;		// aRulesBox height
-		
+
 		while( aRules->FindString( "rules", rindex++, (const char**)&rname) == B_OK)
 		{
 			aRules->FindString( rname, 0, (const char**)&rdesc);
 			aRules->FindString( rname, 1, (const char**)&rdesc2);
-			
+
 			// check if compression tool exists, if not omit rule
 			aRules->FindString( rname, 4, (const char**)&path);
 			entry.SetTo(path);
@@ -529,7 +529,7 @@ ASettingsView::ASettingsView( BMessage *settings)
 
 			imsg = new BMessage( ARCHIVER_MSG_CHANGE_RULE);
 			imsg->AddInt32( "index", rindex-1);
-			
+
 			if( rdesc2[0])
 			{
 				sprintf( ilabel, "%s [%s]", rdesc, rdesc2);
@@ -537,32 +537,32 @@ ASettingsView::ASettingsView( BMessage *settings)
 			}
 			else
 				item = new BRadioButton( BRect( 8, bheight, 0, bheight), rname, rdesc, imsg);
-				
+
 			item->SetFont( &font, B_FONT_ALL);
 			item->GetPreferredSize( &iwidth, &iheight);
 			item->ResizeTo( iwidth, iheight);
-			
+
 			if( bwidth < iwidth) bwidth = iwidth;
 			bheight += iheight;
-			
+
 			aRulesBox->AddChild( item);
-			
+
 			if( !found && !strcmp( sdesc, rdesc) && !strcmp( sdesc2, rdesc2))
 			{
 				item->SetValue( 1);
 				found = true;
 				aSelectedRule = rindex-1;
-				
+
 				// get icon for it
 				char *mime;
 				aRules->FindString( rname, 2, (const char**)&mime);
 				LoadIconForMime( mime);
 			}
 		}
-	
+
 	aRulesBox->ResizeBy( bwidth+16, bheight+4);
 	rect = aRulesBox->Frame();
-	
+
 	if( aWidth < rect.right) aWidth = (int32)ceil( rect.right);
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
 
@@ -587,7 +587,7 @@ ASettingsView::ASettingsView( BMessage *settings)
 	aButton->ResizeToPreferred();
 	aButton->SetEnabled( false);
 	rect = aButton->Frame();
-	
+
 	aButton->MoveBy( -rect.Width(), 0);
 
 	if( aHeight < rect.bottom) aHeight = (int32)ceil( rect.bottom);
@@ -710,18 +710,18 @@ BMessage *
 ASettingsView::LoadRules()
 {
 	BMessage *Rules = new BMessage();
-		
+
 	// make path to rules file
 	BPath path;
-	if( find_directory( B_COMMON_ETC_DIRECTORY, &path) != B_OK)
+	if( find_directory( B_SYSTEM_ETC_DIRECTORY, &path) != B_OK)
 	{
 		path.SetTo( ARCHIVER_RULES_FILE_PATH);
 		path.Append( ARCHIVER_RULES_FILE);
 	}
 	else
 		path.Append( ARCHIVER_RULES_FILE);
-		
-	// open settings file and read rules			
+
+	// open settings file and read rules
 	BFile file;
 	if( file.SetTo( path.Path(), B_READ_ONLY) == B_OK)
 	{
@@ -730,7 +730,7 @@ ASettingsView::LoadRules()
 		char *data = (char*)malloc( size);
 
 		file.Read( data, size);
-		
+
 		// read lines, one by one and tokenize them
 		int32 counter = 0;
 		char name[128];
@@ -741,22 +741,22 @@ ASettingsView::LoadRules()
 			sprintf( name, "rule[%ld]", counter);
 			Rules->AddString( "rules", name);
 			counter++;
-			
+
 			*npos = 0;
-			
+
 			char *tabpos = NULL;
 			while( ( tabpos = strchr( line, 9)))// find "\t"
 			{
 				*tabpos = 0;
-				
+
 				Rules->AddString( name, line);
 
 				line = tabpos+1;
 			}
 			Rules->AddString( name, line);
-			
+
 			*npos = 10;
-			
+
 			line = npos+1;
 		}
 
@@ -812,18 +812,18 @@ ASettingsView::ChangeSettingsRule()
 			aRules->FindString( name, index++, (const char**)&temp);
 			aSettings->AddString( ARCHIVER_SETTINGS_FILE_DESC, temp);
 
-			// file description2 - for different variations (i.e. ZIP compressed file - maximum compression)				
+			// file description2 - for different variations (i.e. ZIP compressed file - maximum compression)
 			aRules->FindString( name, index++, (const char**)&temp);
 			aSettings->AddString( ARCHIVER_SETTINGS_FILE_DESC2, temp);
-				
+
 			// file mime type
 			aRules->FindString( name, index++, (const char**)&temp);
 			aSettings->AddString( ARCHIVER_SETTINGS_FILE_MIME, temp);
-				
+
 			// file extension
 			aRules->FindString( name, index++, (const char**)&temp);
 			aSettings->AddString( ARCHIVER_SETTINGS_FILE_EXT, temp);
-				
+
 			// options (first goes compression tool path and next options for it, i.e. "-9")
 			while( aRules->FindString( name, index++, (const char**)&temp) == B_OK)
 			{
@@ -849,7 +849,7 @@ ASettingsView::RedrawIcon()
 	// left margin background
 	SetHighColor( tint_color( ViewColor(), B_HIGHLIGHT_BACKGROUND_TINT));
 	FillRect( BRect( 0, top, vmiddle, bottom));
-	
+
 	// background
 	SetHighColor( ViewColor());
 	FillRect( BRect( vmiddle, top, right, bottom));
@@ -1063,7 +1063,7 @@ ArchiverWindow::ArchiverWindow( BMessage *refs)
 
 	//
 	LoadSettings();
-	
+
 	// restore window position on screen
 	BPoint pos;
 	if( aSettings->FindPoint( ARCHIVER_SETTINGS_WIN_POS, &pos) == B_OK)
@@ -1078,7 +1078,7 @@ ArchiverWindow::ArchiverWindow( BMessage *refs)
 		type_code typecode;
 		refs->GetInfo( "refs", &typecode, &refscount);
 	}
-	
+
 	// if 0 files (no file was selected in Tracker or Archiver was launched as an application)
 	// than show settings
 	if( !refscount)
@@ -1178,10 +1178,10 @@ ArchiverWindow::Quit()
 	BRect frame = Frame();
 	aSettings->ReplacePoint( ARCHIVER_SETTINGS_WIN_POS, frame.LeftTop());
 	SaveSettings();
-	
+
 	// quit app on window close
 	be_app->PostMessage( B_QUIT_REQUESTED);
-	
+
 	// call default Quit()
 	BWindow::Quit();
 }
@@ -1242,8 +1242,8 @@ ArchiverWindow::LoadSettings()
 	}
 	else
 		path.Append( ARCHIVER_SETTINGS_FILE);
-	
-	// open settings file and read settings			
+
+	// open settings file and read settings
 	BFile file;
 	if( file.SetTo( path.Path(), B_READ_WRITE) == B_OK)
 	{
@@ -1258,7 +1258,7 @@ ArchiverWindow::LoadSettings()
 		{
 			aSettings->Flatten( &file);
 		}
-	}	
+	}
 }
 
 //---------------------------------------------------
@@ -1279,8 +1279,8 @@ ArchiverWindow::SaveSettings()
 	}
 	else
 		path.Append( ARCHIVER_SETTINGS_FILE);
-	
-	// open settings file (create it if there's no file) and write settings			
+
+	// open settings file (create it if there's no file) and write settings
 	BFile file;
 	if( file.SetTo( path.Path(), B_READ_WRITE | B_CREATE_FILE | B_ERASE_FILE) == B_OK)
 	{
@@ -1301,7 +1301,7 @@ ArchiverWindow::Compress( BMessage *refs)
 		type_code typecode;
 		refs->GetInfo( "refs", &typecode, &refscount);
 	}
-	
+
 	if( refscount)
 	{
 		ACompressView *view = new ACompressView( refs, aSettings);
@@ -1445,11 +1445,11 @@ ArchiverApp::RefsReceived( BMessage *msg)
 //	Main Archiver function
 //---------------------------------------------------
 int
-main() 
+main()
 {
 	ArchiverApp *app = new ArchiverApp();
 	app->Run();
-	
+
 	return( 0);
 }
 
@@ -1488,11 +1488,11 @@ Compress( void *Data)
 	// if there is no refs return
 	if ( !ref_c)
 		return -1;
-	
+
 	// more temporary variables
 	BEntry	entry;
 	BPath	path;
-	
+
 	// set current directory, so compression tool will work from it
 	entry_ref dir_ref;
 	Refs->FindRef( ARCHIVER_REFS_DIR_REF, &dir_ref);
@@ -1510,14 +1510,14 @@ Compress( void *Data)
 		int			arg_index = 0;
 		int			ref_index = 0;
 		entry_ref	ref;
-		
+
 		// = options + filenames
 		arg_c += ref_c;
 
 		// allocate array of arguments - they will be passed to compression tool
 		// plus one - last must be NULL
 		char **arg_v = (char **)malloc( sizeof(char *) * (arg_c + 1));
-		
+
 		// parse arguments
 		char *temp;
 		int32 index = 0;
@@ -1533,14 +1533,14 @@ Compress( void *Data)
 			else
 				arg_v[arg_index++] = strdup( temp);
 		}
-				
+
 		// parse filenames
 		while( Refs->FindRef( "refs", ref_index++, &ref) == B_OK)
 		{
 			// if user wants to store file paths there should be such option for compression tool :)
 			arg_v[arg_index++] = strdup( ref.name);
 		}
-		
+
 		// last argument must be NULL
 		arg_v[arg_index] = NULL;
 
@@ -1548,11 +1548,11 @@ Compress( void *Data)
 		thread_id	exec_thread;
 		status_t	exec_thread_return_value;
 		int32		exec_thread_priotity = B_NORMAL_PRIORITY;
-		
-		exec_thread = load_image( arg_c, (const char**) arg_v, (const char**) environ); 
+
+		exec_thread = load_image( arg_c, (const char**) arg_v, (const char**) environ);
 
 		rename_thread( exec_thread, "Archiver_compression_thread");
-		
+
 		if( Settings->FindInt32( ARCHIVER_SETTINGS_PRIORITY, &exec_thread_priotity) == B_OK)
 			set_thread_priority( exec_thread, exec_thread_priotity);
 
@@ -1570,7 +1570,7 @@ Compress( void *Data)
 			free( arg_v[arg_c]);
 
 		free( arg_v);
-		
+
 		// update file's mime type
 		// it doesn't matter if compression finished successfully (file is there)
 		// even if not - nothing happens :)
@@ -1579,7 +1579,7 @@ Compress( void *Data)
 
 		// let ACompressView know compression has been finished/killed/etc...
 		BMessenger( View).SendMessage( ARCHIVER_MSG_COMPRESS_END);
-		
+
 		return( 0);
 	}
 }
