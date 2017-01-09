@@ -51,7 +51,7 @@ SOFTWARE
 #include <View.h>
 #include <Window.h>
 
-#include </boot/home/haiku/headers/os/add-ons/tracker/TrackerAddOn.h>
+#include </boot/system/develop/headers/os/add-ons/tracker/TrackerAddOn.h>
 
 //----------------------------------------------------------------------------
 //
@@ -63,7 +63,7 @@ SOFTWARE
 
 #define	ARCHIVER_SETTINGS_FILE_PATH		"/boot/home/config/settings/"
 #define	ARCHIVER_SETTINGS_FILE			"archiver.settings"
-#define	ARCHIVER_RULES_FILE_PATH		"/boot/home/config/etc/"
+#define	ARCHIVER_RULES_FILE_PATH		"/boot/home/config/non-packaged/etc/"
 #define	ARCHIVER_RULES_FILE				"archiver.rules"
 
 #define	ARCHIVER_SETTINGS_FILE_DESC		"file description"				// "ZIP compressed file"
